@@ -1,9 +1,10 @@
 import React from 'react'
 import { Field } from '../Field'
 import { Button } from '../Button'
+import { ITask } from '../interfaces'
 
 interface AddTaskProps {
-    addTask: (task: string) => void
+    addTask: (task: ITask) => void
 }
 
 export class AddTaskForm extends React.Component<AddTaskProps> {
@@ -18,7 +19,13 @@ export class AddTaskForm extends React.Component<AddTaskProps> {
     }
 
     handleButtonClick = () => {
-        this.props.addTask(this.state.inputValue)
+        if(!this.state.inputValue) return
+        const task = { 
+            date: Date.now(),
+            text: this.state.inputValue
+        }
+        this.props.addTask(task)
+        this.state.inputValue = ''
     }
 
     render() {
@@ -30,6 +37,7 @@ export class AddTaskForm extends React.Component<AddTaskProps> {
                 />
                 <Button 
                     handleButtonClick={this.handleButtonClick}
+                    textLabel="Add task"
                 />
             </>
         )
