@@ -1,18 +1,20 @@
 import React from 'react'
+
 import { Field } from '../Field'
 import { Button } from '../Button'
 import { ITask } from '../interfaces'
+import { kinds } from '../Button/styles'
 
 interface AddTaskProps {
     addTask: (task: ITask) => void
 }
 
-export class AddTaskForm extends React.Component<AddTaskProps> {
+export class AddTask extends React.Component<AddTaskProps> {
     state = {
         inputValue: ''
     }
 
-    onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+    handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
         this.setState({
             inputValue: e.currentTarget.value
         })
@@ -25,7 +27,9 @@ export class AddTaskForm extends React.Component<AddTaskProps> {
             text: this.state.inputValue
         }
         this.props.addTask(task)
-        this.state.inputValue = ''
+        this.setState({
+            inputValue: ''
+        })
     }
 
     render() {
@@ -33,9 +37,10 @@ export class AddTaskForm extends React.Component<AddTaskProps> {
             <>
                 <Field 
                     inputValue={this.state.inputValue} 
-                    onInputChange={this.onInputChange}
+                    handleInputChange={this.handleInputChange}
                 />
-                <Button 
+                <Button
+                    kind={kinds.add}
                     handleButtonClick={this.handleButtonClick}
                     textLabel="Add task"
                 />

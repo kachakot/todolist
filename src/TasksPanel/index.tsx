@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AddTaskForm } from '../AddTaskForm'
+import { AddTask } from '../AddTask'
 import { TasksList } from '../TasksList'
 import { ITask } from '../interfaces'
 
@@ -28,6 +28,18 @@ export class TasksPanel extends React.Component {
         })
     }
 
+    editTask = (date:number, text:string) => {
+        const newTasks = this.state.tasks.map(task => {
+            if (task.date === date) {
+                task.text = text
+            }
+            return task
+        })
+        this.setState({
+            tasks: newTasks
+        })
+    }
+
     componentDidMount() {
         const tasksString = localStorage.getItem('tasks')
         if (tasksString) {
@@ -41,11 +53,12 @@ export class TasksPanel extends React.Component {
     render() {
         return (
             <>
-                <AddTaskForm
+                <AddTask
                     addTask={this.addTask}
                 />
                 <TasksList
                     tasksList={this.state.tasks}
+                    editTask={this.editTask}
                     removeTask={this.removeTask}
                 />
             </>
