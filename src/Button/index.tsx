@@ -1,16 +1,19 @@
 import React from 'react'
+import { ButtonStyled, kinds } from './styles'
 
 interface ButtonProps {
     handleButtonClick: () => void,
-    textLabel: string
+    textLabel: string,
+    kind?: kinds
 }
 
-export const Button = ({handleButtonClick, textLabel}:ButtonProps) => {
+export const Button = ({handleButtonClick, textLabel, kind}:ButtonProps) => {
     return (
-        <button
+        <ButtonStyled
+            kind={kind}
             onClick={handleButtonClick}
             type="submit">
             {textLabel}
-        </button>
+        </ButtonStyled>
     )
 }

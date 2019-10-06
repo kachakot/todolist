@@ -2,14 +2,14 @@ import React from 'react'
 
 interface FieldProps {
     inputValue: string,
-    onInputChange: (e: React.FormEvent<HTMLInputElement>) => void
+    handleInputChange: (e: React.FormEvent<HTMLInputElement>) => void
 }
 
-export const Field = ({inputValue, onInputChange}:FieldProps) => {
+export const Field = ({inputValue, handleInputChange}:FieldProps) => {
     return (
         <input 
             value={inputValue} 
-            onChange={onInputChange}
+            onChange={handleInputChange}
             type="text"
         />
     )
